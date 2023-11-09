@@ -1,0 +1,79 @@
+@import "../../assets/css/mixin";
+
+.home {
+  padding: 2rem;
+  padding-bottom: 0;
+  padding-right: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  background-image: url(../../assets/19366.jpg);
+  background-size: cover;
+  @include respond(phone) {
+    padding: 1rem;
+  }
+
+
+  .content {
+    display: grid;
+    grid-template-columns: 1.5fr 2fr;
+    padding: 0 1rem;
+    gap: 3rem;
+
+
+    @include respond(tab-port) {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @include respond(phone) {
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
+
+    .textContainer {
+      height: max-content;
+      align-self: center;
+      justify-self: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 2rem;
+
+      @include respond(tab-port) {
+        font-size: 2rem;
+      }
+    }
+
+    .firstP {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+
+      @include respond(tab-port) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .secondP {
+      line-height: 1.7rem;
+      text-align: justify;
+      @include respond(tab-port) {
+        font-size: 0.8rem;
+        text-align: left;
+        line-height: 1.5rem;
+      }
+    }
+
+    .cover {
+      background-image: url(../../assets/doctor-cover.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      opacity: 0.5;
+
+      @include respond(phone) {
+        display: none;
+      }
+    }
+  }
+}

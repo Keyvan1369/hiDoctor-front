@@ -1,0 +1,33 @@
+@import "../../assets/css/mixin";
+
+
+.header {
+  ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: unset;
+    margin: 0;
+
+    @include respond(phone) {
+      gap: 0;
+    }
+
+    a {
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 0.25rem 1rem;
+      font-size: 0.8rem;
+      transition: background-color 0.2s ease-in;
+      line-height: 1rem;
+      border-radius: 0.5rem;
+
+
+      &:hover {
+        background-color: lightgrey;
+      }
+    }
+  }
+}
+
