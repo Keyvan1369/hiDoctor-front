@@ -2,6 +2,8 @@ import React, {useMemo, useState} from 'react';
 import style from './register.module.scss'
 import Header from "../../components/header/header.jsx";
 import {Button, FormControl, FormControlLabel, Radio, RadioGroup, TextField} from "@mui/material";
+import {AuthApi} from "../../api/authApi.js";
+import {toast} from "react-toastify";
 
 const ROLES = {
     PATIENT: "patient",
@@ -35,7 +37,12 @@ const Register = () => {
     }
 
     function handleSubmit() {
-
+        AuthApi.register(form)
+            .then(res => {
+                toast.success("sign up successfully")
+            }).catch(err => {
+            toast.error(err.message)
+        })
     }
 
     const formIsValid = useMemo(() => {

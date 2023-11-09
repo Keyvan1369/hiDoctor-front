@@ -2,9 +2,14 @@ import React, {useState} from 'react';
 import style from './login.module.scss'
 import Header from "../../components/header/header.jsx";
 import {Button, TextField} from "@mui/material";
+import {AuthApi} from "../../api/authApi.js";
+import {toast} from "react-toastify";
+import {useDispatch} from "react-redux";
+import {loginStore} from "../../store/slice/auth.slice.js";
 
 const Login = () => {
 
+    const dispatch = useDispatch()
     const [form, setForm] = useState({
         username: "",
         password: ""
@@ -20,7 +25,13 @@ const Login = () => {
     }
 
     function handleSubmit() {
-
+        AuthApi.login(form.username, form.password)
+            .then(res => {
+                toast.success("sign in successfully")
+                dispatch(loginStore(res.data))
+            }).catch(err => {
+            toast.error(err.message)
+        })
     }
 
     return (
