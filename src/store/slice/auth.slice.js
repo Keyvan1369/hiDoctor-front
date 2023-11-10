@@ -11,7 +11,12 @@ function getInitialState() {
         const authStr = localStorage.getItem('user')
         const user = JSON.parse(authStr);
         if (user)
-            return user;
+            return {
+                isAuthenticated: true,
+                role: user.role,
+                username: user.username,
+                fullName: user.fullName
+            };
         else throw new Error()
     } catch (err) {
         return {
@@ -34,7 +39,7 @@ const slice = createSlice({
             state.username = action.payload.user.username
             state.fullName = action.payload.user.fullName
             localStorage.setItem("token", action.payload.token)
-            localStorage.setItem("user", action.payload.user)
+            localStorage.setItem("user", JSON.stringify(action.payload.user))
         },
         logout(state) {
             state.isAuthenticated = false;
