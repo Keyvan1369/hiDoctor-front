@@ -14,6 +14,18 @@ const Header = () => {
         dispatch(logout())
     }
 
+    function renderDoctorMenus() {
+        return <>
+            <li><Link to={'/doctor/setting'}>Settings</Link></li>
+        </>
+    }
+
+    function renderPatientMenus() {
+        return <>
+            {/*<li><Link to={isDoctor ? '/doctor' : '/patient'}>Panel</Link></li>*/}
+        </>
+    }
+
     return (
         <header className={style.header}>
             <nav>
@@ -21,7 +33,7 @@ const Header = () => {
                     <li><Link to="/">Home</Link></li>
                     {
                         isAuthenticated ? <>
-                            <li><Link to={isDoctor ? '/doctor' : '/patient'}>Panel</Link></li>
+                            {isDoctor ? renderDoctorMenus() : renderPatientMenus()}
                             <li><Link onClick={handleLogout}>Logout</Link></li>
                         </> : <>
                             <li><Link to="/register">Register</Link></li>

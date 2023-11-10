@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
 import {loginStore} from "../../store/slice/auth.slice.js";
 import api from "../../api/api.js";
+import axios from "axios";
 
 const Login = () => {
 
@@ -29,7 +30,7 @@ const Login = () => {
         AuthApi.login(form.username, form.password)
             .then(res => {
                 toast.success("sign in successfully")
-                api.defaults.headers.token = localStorage.getItem("token")
+                api.defaults.headers.token = res.data.token
                 dispatch(loginStore(res.data))
             }).catch(err => {
             toast.error(err.message)

@@ -10,4 +10,7 @@ export const AuthApi = {
     updateSetting(settings) {
         return api.put("/auth/update", settings)
     },
+    getProfile() {
+        return api.get("/auth/profile")
+    },
 }

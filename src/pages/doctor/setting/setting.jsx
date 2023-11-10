@@ -25,6 +25,10 @@ const Setting = () => {
         ExpertiseApi.getAll().then(res => {
             setExpertiseList(res.data)
         }).catch(err => toast.error(err))
+        AuthApi.getProfile().then(res => {
+            if (res.data.setting)
+                setForm(res.data.setting)
+        })
     }, [])
 
     function handleChangeForm(value, name) {
