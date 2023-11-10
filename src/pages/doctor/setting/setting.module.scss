@@ -3,4 +3,29 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  margin-top: -2rem;
+
+  .hint {
+    margin: -1rem 0 1rem;
+    color: #aaa;
+    font-size: 0.8rem;
+  }
+
+  .card {
+    width: 50vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .inputTimeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    label {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 0.8rem;
+    }
+  }
 }

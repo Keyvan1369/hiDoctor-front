@@ -1,7 +1,10 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3023/api"
+    baseURL: "http://localhost:3023/api",
+    headers: {
+        token: localStorage.getItem("token")
+    }
 })
 
 api.interceptors.response.use(value => value, error => {

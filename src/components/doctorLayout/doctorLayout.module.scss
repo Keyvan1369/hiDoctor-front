@@ -14,7 +14,7 @@
   }
 
 
-  .content {
+  .container {
     padding: 0 1rem;
     position: relative;
 
@@ -28,6 +28,12 @@
       padding: 0;
     }
 
+    .content {
+      z-index: 1;
+      position: relative;
+      height: 100%;
+
+    }
 
     .cover {
       background-image: url(../../assets/doctor-cover.png);

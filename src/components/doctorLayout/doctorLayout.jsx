@@ -7,8 +7,10 @@ const DoctorLayout = () => {
     return (
         <div className={style.doctor}>
             <Header/>
-            <div className={style.content}>
-                <Outlet/>
+            <div className={style.container}>
+                <div className={style.content}>
+                    <Outlet/>
+                </div>
                 <div className={style.cover}/>
             </div>
         </div>

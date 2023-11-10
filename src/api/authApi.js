@@ -7,4 +7,7 @@ export const AuthApi = {
     register(user) {
         return api.post("/auth/register", user)
     },
+    updateSetting(settings) {
+        return api.put("/auth/update", settings)
+    },
 }
