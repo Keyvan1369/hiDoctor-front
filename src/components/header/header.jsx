@@ -1,11 +1,19 @@
 import React from 'react';
 import style from "./header.module.scss";
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logout, Roles} from "../../store/slice/auth.slice.js";
 
 const Header = () => {
 
-    const isAuthenticated = useSelector(store => store.auth.isAuthenticated)
+    const {isAuthenticated, role} = useSelector(store => store.auth)
+    const dispatch = useDispatch()
+    const isDoctor = role === Roles.DOCTOR
+
+    function handleLogout() {
+        dispatch(logout())
+    }
+
     return (
         <header className={style.header}>
             <nav>
@@ -13,7 +21,8 @@ const Header = () => {
                     <li><Link to="/">Home</Link></li>
                     {
                         isAuthenticated ? <>
-                            <li><Link to="/register">Panel</Link></li>
+                            <li><Link to={isDoctor ? '/doctor' : '/patient'}>Panel</Link></li>
+                            <li><Link onClick={handleLogout}>Logout</Link></li>
                         </> : <>
                             <li><Link to="/register">Register</Link></li>
                             <li><Link to="/login">Login</Link></li>
