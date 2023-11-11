@@ -17,6 +17,7 @@ const Header = () => {
     function renderDoctorMenus() {
         return <>
             <li><Link to={'/doctor/setting'}>Settings</Link></li>
+            <li><Link to={'/doctor/plan'}>Future Plan</Link></li>
         </>
     }
 

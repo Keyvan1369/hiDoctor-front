@@ -6,6 +6,7 @@ import Register from "./pages/register/register.jsx";
 import {useSelector} from "react-redux";
 import DoctorLayout from "./components/doctorLayout/doctorLayout.jsx";
 import Setting from "./pages/doctor/setting/setting.jsx";
+import Plan from "./pages/doctor/plan/plan.jsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/register" element={!isAuthenticated ? <Register/> : <Navigate to="/"/>}/>
         <Route path="/doctor" element={isAuthenticated ? <DoctorLayout/> : <Navigate to="/login"/>}>
             <Route path="setting" element={<Setting/>}/>
+            <Route path="plan" element={<Plan/>}/>
             <Route path="" element={<Navigate to="/doctor/setting"/>}/>
         </Route>
         <Route path="*" element={<Navigate to="/"/>}/>

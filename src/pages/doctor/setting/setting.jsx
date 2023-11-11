@@ -27,8 +27,13 @@ const Setting = () => {
         }).catch(err => toast.error(err))
         AuthApi.getProfile().then(res => {
             if (res.data.setting)
-                setForm(res.data.setting)
-        })
+                setForm({
+                    expertise:res.data.setting.expertise,
+                    appointmentTime:res.data.setting.appointmentTime,
+                    dayStartTime:res.data.setting.dayStartTime,
+                    dayEndTime:res.data.setting.dayEndTime,
+                })
+        }).catch(err => toast.error(err))
     }, [])
 
     function handleChangeForm(value, name) {
@@ -43,10 +48,11 @@ const Setting = () => {
             }).catch(err => toast.error(err))
     }
 
+
+
     return (
         <div className={style.container}>
-            <Card title="Settings">
-                <p className={style.hint}>please enter some required fields about yourself</p>
+            <Card title="Settings" description="please enter some required fields about yourself">
                 <div className={style.card}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Expertise</InputLabel>
