@@ -16,29 +16,29 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 const Plan = () => {
 
     const [date, setDate] = useState(moment().add(1, "day"))
-    const [settings, setSettings] = useState()
-    const [appointments, setAppointmentTimes] = useState([])
     const [loading, setLoading] = useState(true)
+    const [settings, setSettings] = useState()
+    const [appointmentTimes, setAppointmentTimes] = useState([])
 
     useEffect(() => {
-        setLoading(true)
         AuthApi.getProfile().then(res => {
             if (res.data.setting)
                 setSettings(res.data.setting)
-        }).catch(err => toast.error(err)).finally(() => setLoading(false))
+        }).catch(err => toast.error(err.message))
+            .finally(() => setLoading(false))
     }, [])
 
     useEffect(() => {
         AppointmentTimeApi.getAll(momentDateToNumber(date,"day")).then(res => {
             setAppointmentTimes(res.data)
-        }).catch(err => toast.error(err))
+        }).catch(err => toast.error(err.message))
     }, [date])
 
     function syncWithServer(times) {
         AppointmentTimeApi.create(momentDateToNumber(date,"day"), times)
             .then(res => {
                 setAppointmentTimes(res.data)
-            }).catch(err => toast.error(err))
+            }).catch(err => toast.error(err.message))
     }
 
     const times = useMemo(() => {
@@ -75,7 +75,7 @@ const Plan = () => {
     }, [date, settings])
 
     function handlePrevDate() {
-        setDate(date => moment(date).add(-1, "day"))
+        setDate(date => moment(date).subtract(1, "day"))
     }
 
     function handleNextDate() {
@@ -83,16 +83,16 @@ const Plan = () => {
     }
 
     function handleSelectTime(time) {
-        const foundTimeIndex = appointments.findIndex(item => item.from === time.from)
+        const foundTimeIndex = appointmentTimes.findIndex(item => item.from === time.from)
         if (foundTimeIndex !== -1)
-            appointments.splice(foundTimeIndex, 1)
-        else appointments.push(time)
-        setAppointmentTimes([...appointments]);
-        syncWithServer(appointments);
+            appointmentTimes.splice(foundTimeIndex, 1)
+        else appointmentTimes.push(time)
+        setAppointmentTimes([...appointmentTimes]);
+        syncWithServer(appointmentTimes);
     }
 
     function isTimeSelected(time) {
-        const foundTimeIndex = appointments.findIndex(item => item.from === time.from)
+        const foundTimeIndex = appointmentTimes.findIndex(item => item.from === time.from)
         return foundTimeIndex !== -1;
     }
 
@@ -122,7 +122,7 @@ const Plan = () => {
                         <header className={style.actions}>
                             <Button onClick={handleSelectAll} startIcon={<LibraryAddCheckIcon/>} size="small">Select
                                 All</Button>
-                            {appointments.length > 0 &&
+                            {appointmentTimes.length > 0 &&
                                 <Button onClick={handleDeselectAll} startIcon={<Close/>} size="small">Remove All
                                     Selects</Button>}
                         </header>

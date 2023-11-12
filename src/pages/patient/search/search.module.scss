@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5%;
+  height: 100%;
+  flex-direction: column;
+
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .p {
+    color: #777;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    font-weight: 200;
+    text-transform: capitalize;
+  }
+
+  
+}

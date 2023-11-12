@@ -4,6 +4,7 @@ import Header from "../../components/header/header.jsx";
 import {Button, FormControl, FormControlLabel, Radio, RadioGroup, TextField} from "@mui/material";
 import {AuthApi} from "../../api/authApi.js";
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const ROLES = {
     PATIENT: "patient",
@@ -11,6 +12,8 @@ const ROLES = {
 }
 
 const Register = () => {
+
+    const navigate = useNavigate();
 
     const [form, setForm] = useState({
         username: "",
@@ -40,6 +43,7 @@ const Register = () => {
         AuthApi.register(form)
             .then(res => {
                 toast.success("sign up successfully")
+                navigate("/login")
             }).catch(err => {
             toast.error(err.message)
         })

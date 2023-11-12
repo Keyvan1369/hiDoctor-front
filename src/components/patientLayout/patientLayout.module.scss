@@ -1,0 +1,55 @@
+@import "../../assets/css/mixin";
+
+.patient {
+  padding: 2rem;
+  padding-bottom: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: max-content 1fr;
+  background-image: url(../../assets/19366.jpg);
+  background-size: cover;
+  overflow-y: auto;
+  @include respond(phone) {
+    padding: 1rem;
+  }
+
+
+  .container {
+    padding: 0 1rem;
+    position: relative;
+
+
+    @include respond(tab-port) {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @include respond(phone) {
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
+
+    .content {
+      z-index: 1;
+      position: relative;
+      height: 100%;
+
+    }
+
+    .cover {
+      background-image: url(../../assets/doctor-cover.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      height: 100%;
+      width: 50%;
+      top: 0;
+      right: 0;
+      opacity: 0.2;
+
+      @include respond(phone) {
+        display: none;
+      }
+    }
+  }
+}

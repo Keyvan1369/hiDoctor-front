@@ -7,7 +7,6 @@ import {toast} from "react-toastify";
 import {useDispatch} from "react-redux";
 import {loginStore} from "../../store/slice/auth.slice.js";
 import api from "../../api/api.js";
-import axios from "axios";
 
 const Login = () => {
 

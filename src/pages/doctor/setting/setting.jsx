@@ -24,7 +24,7 @@ const Setting = () => {
     useEffect(() => {
         ExpertiseApi.getAll().then(res => {
             setExpertiseList(res.data)
-        }).catch(err => toast.error(err))
+        }).catch(err => toast.error(err.message))
         AuthApi.getProfile().then(res => {
             if (res.data.setting)
                 setForm({
@@ -33,7 +33,7 @@ const Setting = () => {
                     dayStartTime:res.data.setting.dayStartTime,
                     dayEndTime:res.data.setting.dayEndTime,
                 })
-        }).catch(err => toast.error(err))
+        }).catch(err => toast.error(err.message))
     }, [])
 
     function handleChangeForm(value, name) {
@@ -45,7 +45,7 @@ const Setting = () => {
         AuthApi.updateSetting(form)
             .then(res => {
                 toast.success("settings updated")
-            }).catch(err => toast.error(err))
+            }).catch(err => toast.error(err.message))
     }
 
 
@@ -55,10 +55,8 @@ const Setting = () => {
             <Card title="Settings" description="please enter some required fields about yourself">
                 <div className={style.card}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Expertise</InputLabel>
+                        <InputLabel >Expertise</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
                             value={form.expertise}
                             label="Expertise"
                             onChange={(e,) => handleChangeForm(e.target.value, "expertise")}
