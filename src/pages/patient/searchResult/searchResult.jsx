@@ -2,20 +2,25 @@ import { useEffect, useMemo, useState } from "react";
 import SearchBox from "../../../components/searchBox/searchBox";
 import style from "./searchResult.module.scss";
 import { Button } from "@mui/material";
-import { AccountCircle, Map } from "@mui/icons-material";
+import { AccountCircle } from "@mui/icons-material";
 import Card from "../../../components/card/card";
 import { useLocation } from "react-router-dom";
 import { PatientApi } from "../../../api/patientApi";
 import { toast } from "react-toastify";
+import Map from "./components/map";
 
 const SearchResult = () => {
   const [inputValue, setInputValue] = useState("");
   const { search } = useLocation();
   const [doctors, setDoctors] = useState([]);
+  const [mode, setMode] = useState("list");
 
-  const searchExpertiseValue = useMemo(() => {
+  const { searchExpertiseValue, expertiseTitle } = useMemo(() => {
     const params = new URLSearchParams(search);
-    return params.get("expertise");
+    return {
+      searchExpertiseValue: params.get("expertise"),
+      expertiseTitle: params.get("name"),
+    };
   }, [search]);
 
   useEffect(() => {
@@ -28,6 +33,33 @@ const SearchResult = () => {
     else setDoctors([]);
   }, [searchExpertiseValue]);
 
+  function renderContent() {
+    if (mode === "list")
+      return (
+        <div className={style.doctors}>
+          {doctors.map((item) => (
+            <div className={style.doctorItem} key={item._id}>
+              <AccountCircle className={style.doctorIcon} />
+              <span className={style.fullName}>{item.fullName}</span>
+              <span className={style.expertise}>
+                {item.setting.expertise?.title} | {item.setting.dayStartTime}-
+                {item.setting.dayEndTime}
+              </span>
+              <Button
+                className={style.reserveBtn}
+                color="error"
+                size="small"
+                variant="outlined"
+              >
+                Reserve
+              </Button>
+            </div>
+          ))}
+        </div>
+      );
+    else return <Map doctors={doctors} />;
+  }
+
   return (
     <div className={style.container}>
       <SearchBox
@@ -36,20 +68,20 @@ const SearchResult = () => {
         onChangeValue={(value) => setInputValue(value)}
       />
       <Card
-        title="Search Result"
+        title={`Search Result ${expertiseTitle && "- " + expertiseTitle}`}
         className={style.card}
-        action={<Button startIcon={<Map />}>Toggle Map View</Button>}
+        action={
+          <Button
+            className={style.modeBtn}
+            onClick={() => setMode(mode === "list" ? "map" : "list")}
+            startIcon={<Map />}
+            size="small"
+          >
+            {mode === "list" ? "Toggle Map View" : "Toggle List View"}
+          </Button>
+        }
       >
-        <div className={style.doctors}>
-          {doctors.map((item) => (
-            <div className={style.doctorItem} key={item._id}>
-              <AccountCircle className={style.doctorIcon} />
-              <span className={style.fullName}>{item.fullName}</span>
-              <span className={style.expertise}>{item.setting.expertise?.title} | {item.setting.dayStartTime}-{item.setting.dayEndTime}</span>
-              <Button className={style.reserveBtn} color="error" size="small" variant="outlined">Reserve</Button>
-            </div>
-          ))}
-        </div>
+        {renderContent()}
       </Card>
     </div>
   );

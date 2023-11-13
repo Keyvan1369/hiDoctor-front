@@ -74,7 +74,7 @@ const SearchBox = ({ value, onChangeValue, className }) => {
                   <li key={item._id}>
                     <Link
                       onClick={() => setOpen(false)}
-                      to={`/patient/result?expertise=${item._id}`}
+                      to={`/patient/result?expertise=${item._id}&name=${item.title}`}
                     >
                       <HealthAndSafety />
                       {item.fullName}
@@ -92,7 +92,7 @@ const SearchBox = ({ value, onChangeValue, className }) => {
                   <li key={item._id}>
                     <Link
                       onClick={() => handleExpertiseClick(item)}
-                      to={`/patient/result?expertise=${item._id}`}
+                      to={`/patient/result?expertise=${item._id}&name=${item.title}`}
                     >
                       <MedicalServices />
                       {item.title}
