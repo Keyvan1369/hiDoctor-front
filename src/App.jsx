@@ -11,6 +11,7 @@ import {Roles} from "./store/slice/auth.slice.js";
 import PatientLayout from './components/patientLayout/patientLayout.jsx';
 import Search from './pages/patient/search/search.jsx';
 import SearchResult from './pages/patient/searchResult/searchResult.jsx';
+import Reserve from './pages/patient/reserve/reserve.jsx';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
          <Route path="/patient" element={isAuthenticated && role===Roles.PATIENT ? <PatientLayout/> : <Navigate to="/login"/>}>
             <Route path="search" element={<Search/>}/>
             <Route path="result" element={<SearchResult/>}/>
+            <Route path="reserve/:doctor" element={<Reserve/>}/>
             <Route path="" element={<Navigate to="/patient/search"/>}/>
         </Route>
         <Route path="*" element={<Navigate to="/"/>}/>

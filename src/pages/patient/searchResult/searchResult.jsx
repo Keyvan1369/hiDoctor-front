@@ -4,7 +4,7 @@ import style from "./searchResult.module.scss";
 import { Button } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import Card from "../../../components/card/card";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { PatientApi } from "../../../api/patientApi";
 import { toast } from "react-toastify";
 import Map from "./components/map";
@@ -14,6 +14,7 @@ const SearchResult = () => {
   const { search } = useLocation();
   const [doctors, setDoctors] = useState([]);
   const [mode, setMode] = useState("list");
+  const navigate = useNavigate();
 
   const { searchExpertiseValue, expertiseTitle } = useMemo(() => {
     const params = new URLSearchParams(search);
@@ -50,6 +51,7 @@ const SearchResult = () => {
                 color="error"
                 size="small"
                 variant="outlined"
+                onClick={() => navigate(`/patient/reserve/${item._id}`)}
               >
                 Reserve
               </Button>

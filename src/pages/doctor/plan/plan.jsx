@@ -15,7 +15,7 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
 const Plan = () => {
 
-    const [date, setDate] = useState(moment().add(1, "day"))
+    const [date, setDate] = useState(moment())
     const [loading, setLoading] = useState(true)
     const [settings, setSettings] = useState()
     const [appointmentTimes, setAppointmentTimes] = useState([])

@@ -74,10 +74,11 @@ const SearchBox = ({ value, onChangeValue, className }) => {
                   <li key={item._id}>
                     <Link
                       onClick={() => setOpen(false)}
-                      to={`/patient/result?expertise=${item._id}&name=${item.title}`}
+                      to={`/patient/reserve/${item._id}`}
                     >
                       <HealthAndSafety />
-                      {item.fullName}
+                      <strong>{item.username}</strong>
+                       {item.fullName}
                     </Link>
                   </li>
                 ))}
