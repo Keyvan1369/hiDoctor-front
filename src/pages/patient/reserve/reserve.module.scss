@@ -45,9 +45,14 @@
       padding: 1rem !important;
       cursor: pointer !important;
       border: 3px solid transparent;
+      height: max-content;
       &.active {
         background-color: #ebebeb !important;
         border-color:  green;
+      }
+
+      &.forbidden {
+        opacity: 0.5;
       }
     }
 

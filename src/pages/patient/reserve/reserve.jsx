@@ -11,6 +11,7 @@ import {
   momentDateToNumber,
   numberDateToMoment,
 } from "../../../utils/date.utils";
+import { AppointmentApi } from "../../../api/appointmentApi";
 
 const Reserve = () => {
   const [doctor, setDoctor] = useState();
@@ -66,6 +67,20 @@ const Reserve = () => {
     setSelectedTime(time);
   }
 
+  function handleReserve() {
+    AppointmentApi.create({
+      time: selectedTime._id,
+      from: selectedTime.from,
+      to: selectedTime.to,
+      date: selectedTime.date,
+      doctor: doctorId,
+    })
+      .then((res) => {
+        toast.success("appointment successfully saved");
+      })
+      .catch((err) => toast.error(err.message));
+  }
+
   if (loading) return <LinearProgress></LinearProgress>;
   if (!doctor)
     return (
@@ -101,7 +116,12 @@ const Reserve = () => {
       <main>
         <header className={style.timeHeader}>
           <h3>Doctor Times :</h3>
-          <Button disabled={!selectedTime} size="small" variant="contained">
+          <Button
+            disabled={!selectedTime}
+            onClick={handleReserve}
+            size="small"
+            variant="contained"
+          >
             Reserve - {selectedTimeLabel}
           </Button>
         </header>
@@ -126,9 +146,10 @@ const Reserve = () => {
               <ButtonBase
                 onClick={() => handleSelectTime(item)}
                 key={item.from}
+                disabled={!item.free}
                 className={`${style.timeCard} ${
                   item._id === selectedTime?._id && style.active
-                }`}
+                } ${!item.free && style.forbidden}`}
               >
                 <span className={style.timeCardFrom}>
                   {numberDateToMoment(item.from).format("HH:mm")}
