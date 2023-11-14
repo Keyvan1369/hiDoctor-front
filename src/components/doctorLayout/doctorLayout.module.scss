@@ -8,16 +8,16 @@
   display: grid;
   grid-template-rows: max-content 1fr;
   background-image: url(../../assets/19366.jpg);
+
   background-size: cover;
   @include respond(phone) {
     padding: 1rem;
   }
 
-
   .container {
     padding: 0 1rem;
     position: relative;
-
+    overflow-y: auto;
 
     @include respond(tab-port) {
       grid-template-columns: 1fr 1fr;
@@ -32,7 +32,6 @@
       z-index: 1;
       position: relative;
       height: 100%;
-
     }
 
     .cover {

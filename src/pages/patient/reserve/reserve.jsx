@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import style from "./reserve.module.scss";
 import { PatientApi } from "../../../api/patientApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Button, ButtonBase, LinearProgress } from "@mui/material";
 import Map from "../searchResult/components/map";
@@ -19,6 +19,7 @@ const Reserve = () => {
   const { doctor: doctorId } = useParams();
   const [date, setDate] = useState(moment());
   const [times, setTimes] = useState([]);
+  const navigate = useNavigate();
   const [selectedTime, setSelectedTime] = useState();
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const Reserve = () => {
     })
       .then((res) => {
         toast.success("appointment successfully saved");
+        navigate(-1);
       })
       .catch((err) => toast.error(err.message));
   }

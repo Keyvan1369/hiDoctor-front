@@ -12,6 +12,7 @@ import PatientLayout from './components/patientLayout/patientLayout.jsx';
 import Search from './pages/patient/search/search.jsx';
 import SearchResult from './pages/patient/searchResult/searchResult.jsx';
 import Reserve from './pages/patient/reserve/reserve.jsx';
+import Appointments from './pages/doctor/appointments/appointments.jsx';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/doctor" element={isAuthenticated && role===Roles.DOCTOR ? <DoctorLayout/> : <Navigate to="/login"/>}>
             <Route path="setting" element={<Setting/>}/>
             <Route path="plan" element={<Plan/>}/>
+            <Route path="appointments" element={<Appointments/>}/>
             <Route path="" element={<Navigate to="/doctor/plan"/>}/>
         </Route>
          <Route path="/patient" element={isAuthenticated && role===Roles.PATIENT ? <PatientLayout/> : <Navigate to="/login"/>}>

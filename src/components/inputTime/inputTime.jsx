@@ -3,7 +3,7 @@ import './inputTime.scss';
 
 
 const InputTime = (props) => {
-    const {value, setValue,classes} = props
+    const {value, setValue,classes,disabled} = props
 
     const [values, setValues] = useState(["0", "0", "0", "0"])
     const input1 = useRef(null);
@@ -88,21 +88,21 @@ const InputTime = (props) => {
     return (
         <div className="inputTime">
             <div className={`inputTime__box ${classes?.box}`}>
-                <input className={classes?.number} onFocus={onFocus} type={"tel"} ref={input1} value={values[0]}
+                <input disabled={disabled} className={classes?.number} onFocus={onFocus} type={"tel"} ref={input1} value={values[0]}
                        onKeyUp={(e) => handleKeyDown(e, 0)}
                        onChange={(e) => handleChangeInput(e, 0, 2)}/>
-                <input className={classes?.number} onFocus={onFocus} type={"tel"} onKeyUp={(e) => handleKeyDown(e, 1)} value={values[1]}
+                <input  disabled={disabled} className={classes?.number} onFocus={onFocus} type={"tel"} onKeyUp={(e) => handleKeyDown(e, 1)} value={values[1]}
                        ref={input2}
                        onChange={(e) => handleChangeInput(e, 1, 9)}
                 />
             </div>
             <span className={classes?.seperator}>:</span>
             <div className={`inputTime__box ${classes?.box}`}>
-                <input className={classes?.number} onFocus={onFocus} type={"num"} onKeyUp={(e) => handleKeyDown(e, 2)} value={values[2]}
+                <input  disabled={disabled} className={classes?.number} onFocus={onFocus} type={"num"} onKeyUp={(e) => handleKeyDown(e, 2)} value={values[2]}
                        ref={input3}
                        onChange={(e) => handleChangeInput(e, 2, 5)}
                 />
-                <input className={classes?.number} onFocus={onFocus} type={"tel"} onKeyUp={(e) => handleKeyDown(e, 3)} value={values[3]}
+                <input  disabled={disabled} className={classes?.number} onFocus={onFocus} type={"tel"} onKeyUp={(e) => handleKeyDown(e, 3)} value={values[3]}
                        ref={input4}
                        onChange={(e) => handleChangeInput(e, 3, 9)}
                 />
