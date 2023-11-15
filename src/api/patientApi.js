@@ -13,4 +13,7 @@ export const PatientApi = {
   getDoctorTimes(id, date) {
     return api.get(`/patient/getDoctorTimes/${id}`, { params: { date } });
   },
+  getAppointments(date) {
+    return api.get(`/patient/appointments/${date}`);
+  },
 };

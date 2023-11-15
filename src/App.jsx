@@ -13,6 +13,7 @@ import Search from './pages/patient/search/search.jsx';
 import SearchResult from './pages/patient/searchResult/searchResult.jsx';
 import Reserve from './pages/patient/reserve/reserve.jsx';
 import Appointments from './pages/doctor/appointments/appointments.jsx';
+import PatientAppointments from './pages/patient/patientAppointments/patientAppointments.jsx';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="search" element={<Search/>}/>
             <Route path="result" element={<SearchResult/>}/>
             <Route path="reserve/:doctor" element={<Reserve/>}/>
+            <Route path="appointments" element={<PatientAppointments/>}/>
             <Route path="" element={<Navigate to="/patient/search"/>}/>
         </Route>
         <Route path="*" element={<Navigate to="/"/>}/>

@@ -1,3 +1,5 @@
+@import '../../../assets/css/mixin.scss';
+
 .container {
   display: flex;
   align-items: center;
@@ -9,6 +11,10 @@
   h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+
+    @include respond(phone){
+      font-size: 2rem;
+    }
   }
 
   .p {
@@ -17,6 +23,11 @@
     font-size: 1.5rem;
     font-weight: 200;
     text-transform: capitalize;
+
+    @include respond(phone){
+      font-size: 1rem;
+      text-align: center;
+    }
   }
 
   

@@ -23,6 +23,11 @@
       transition: background-color 0.2s ease-in;
       line-height: 1rem;
       border-radius: 0.5rem;
+      @include respond(phone) {
+        font-size: 0.7rem;
+        padding : 0.25rem 0.5rem
+      }
+
 
 
       &:hover {

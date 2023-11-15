@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import SearchBox from "../../../components/searchBox/searchBox";
 import style from "./searchResult.module.scss";
-import { Button } from "@mui/material";
-import { AccountCircle } from "@mui/icons-material";
+import { Button, IconButton, useMediaQuery } from "@mui/material";
+import { AccountCircle, MapSharp } from "@mui/icons-material";
 import Card from "../../../components/card/card";
 import { useLocation, useNavigate } from "react-router-dom";
 import { PatientApi } from "../../../api/patientApi";
@@ -15,7 +15,7 @@ const SearchResult = () => {
   const [doctors, setDoctors] = useState([]);
   const [mode, setMode] = useState("list");
   const navigate = useNavigate();
-
+  const mobileSize = useMediaQuery("(max-width:600px)");
   const { searchExpertiseValue, expertiseTitle } = useMemo(() => {
     const params = new URLSearchParams(search);
     return {
@@ -73,14 +73,22 @@ const SearchResult = () => {
         title={`Search Result ${expertiseTitle && "- " + expertiseTitle}`}
         className={style.card}
         action={
-          <Button
-            className={style.modeBtn}
-            onClick={() => setMode(mode === "list" ? "map" : "list")}
-            startIcon={<Map />}
-            size="small"
-          >
-            {mode === "list" ? "Toggle Map View" : "Toggle List View"}
-          </Button>
+          mobileSize ? (
+            <IconButton
+              onClick={() => setMode(mode === "list" ? "map" : "list")}
+            >
+              <MapSharp/>
+            </IconButton>
+          ) : (
+            <Button
+              className={style.modeBtn}
+              onClick={() => setMode(mode === "list" ? "map" : "list")}
+              startIcon={<Map />}
+              size="small"
+            >
+              {mode === "list" ? "Toggle Map View" : "Toggle List View"}
+            </Button>
+          )
         }
       >
         {renderContent()}

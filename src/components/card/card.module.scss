@@ -1,3 +1,5 @@
+@import "../../assets/css/mixin.scss";
+
 .card {
   background-color: white;
   border-radius: 1rem;
@@ -11,7 +13,11 @@
 .h1 {
   color: #777;
   font-size: 1.2rem;
-  margin: 0 0 1rem;
+  margin: 0;
+
+  @include respond(phone) {
+    font-size: 0.8rem;
+  }
 }
 
 .hint {
@@ -24,5 +30,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-height : 4rem;
+  max-height: 4rem;
+  margin-bottom: 1rem;
+
+  @include respond(phone) {
+    button {
+      font-size: 0.8rem !important;
+    }
+  }
 }

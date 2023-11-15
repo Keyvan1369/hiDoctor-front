@@ -33,6 +33,7 @@ const Header = () => {
       <>
         <li>
           <Link to={"/patient/search"}>Search</Link>
+          <Link to={"/patient/appointments"}>Appointments</Link>
         </li>
       </>
     );
