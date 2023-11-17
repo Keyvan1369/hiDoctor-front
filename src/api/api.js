@@ -3,7 +3,7 @@ import axios from "axios";
 
 console.log();
 const api = axios.create({
-    baseURL: process.env.NODE_ENV==="development"? "http://localhost:3010/api":"/api",
+    baseURL: process.env.NODE_ENV==="development"? "http://localhost:3011/api":"/api",
     headers: {
         token: localStorage.getItem("token")
     }
