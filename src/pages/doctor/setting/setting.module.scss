@@ -1,3 +1,5 @@
+@import '../../../assets/css/mixin.scss';
+
 .container {
   display: flex;
   // align-items: center;
@@ -13,6 +15,10 @@
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
     margin-bottom: 1rem;
+
+    @include respond(phone) {
+      width : 100%
+    }
   }
 
   .inputTimeContainer {
